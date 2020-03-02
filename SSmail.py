@@ -7,22 +7,22 @@ import pyautogui
 import time
 
 #CUENTA CORREO
-user = "lizandrovivanco16@gmail.com"
-pasw = "lizandrito232114"
-de = "Lizandro V"
+user = "svc-anovope.notifica@ingrammicro.com"
+pasw = "q7XH!V6L"
+de = "svc-anovope.notifica@ingrammicro.com"
 
 #VARIABLES
-dest="lizandro_131@hotmail.com"
-copia="lizandrovivanco16@gmail.com"
-asunto="Error Portal"
-textomsj="Estimados, se encontro el siguiente error"
+dest="lizandro.vivanco@ingrammicro.com"
+copia="claudio.quispe@ingrammicro.com,abel.delacruz@ingrammicro.com,giancarlo.paredes@ingrammicro.com"
+asunto="Error RPA - Portal"
+textomsj="Estimados, se envia por adjunto los errores encontrados"
 name1="Error 1"
 name2="Error 2"
-archivo1="C:\\Users\\No Tocar!!\\Downloads\\Capturas\\Error 1.png"
-archivo2="C:\\Users\\No Tocar!!\\Downloads\\Capturas\\Error 2.png"
+archivo1="C:\\Screenshots\\Error 1.png"
+archivo2="C:\\Screenshots\\Error 2.png"
 
 def enviarmsj():
-    gmail = smtplib.SMTP("smtp.gmail.com",587)
+    gmail = smtplib.SMTP("smtp.office365.com",587)
     gmail.starttls()
     try:
         print("iniciar")
@@ -64,10 +64,10 @@ def enviarmsj():
         print("Conexion cerrada")
 
 def screenshot():
-    time.sleep(5)
-    pyautogui.screenshot("C:\\Users\\No Tocar!!\\Downloads\\Capturas\\" + str(name1) + ".png")
-    time.sleep(5)
-    pyautogui.screenshot("C:\\Users\\No Tocar!!\\Downloads\\Capturas\\" + str(name2) + ".png")
+    time.sleep(30)
+    pyautogui.screenshot("C:\\Screenshots\\" + str(name1) + ".png")
+    time.sleep(120)
+    pyautogui.screenshot("C:\\Screenshots\\" + str(name2) + ".png")
     time.sleep(5)
 
 screenshot()
