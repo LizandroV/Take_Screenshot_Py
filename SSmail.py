@@ -1,4 +1,4 @@
-import smtplib, getpass, os
+import smtplib, os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -7,27 +7,28 @@ import pyautogui
 import time
 
 #CUENTA CORREO
-user = "svc-anovope.notifica@ingrammicro.com"
-pasw = "q7XH!V6L"
-de = "svc-anovope.notifica@ingrammicro.com"
+user = "RPA_asdasdadaqf@hotmail.com"
+pasw = """123qweASD!"#"""
+de = "RPA_asdasdadaqf@hotmail.com"
 
 #VARIABLES
-dest="lizandro.vivanco@ingrammicro.com"
-copia="claudio.quispe@ingrammicro.com,abel.delacruz@ingrammicro.com,giancarlo.paredes@ingrammicro.com"
-asunto="Error RPA - Portal"
-textomsj="Estimados, se envia por adjunto los errores encontrados"
+dest="lizandro_131@hotmail.com"
+copia="RPA_asdasdadaqf@hotmail.com,informesrpa@yahoo.com"
+asunto="Error RPA"
+textomsj="Estimado, se envia por adjunto el error encontrado"
 name1="Error 1"
-name2="Error 2"
 archivo1="C:\\Screenshots\\Error 1.png"
-archivo2="C:\\Screenshots\\Error 2.png"
 
 def enviarmsj():
-    gmail = smtplib.SMTP("smtp.office365.com",587)
-    gmail.starttls()
+    smtp_server = 'smtp-mail.outlook.com'
+    smtp_port = 587
+    
     try:
         print("iniciar")
-        gmail.login(user,pasw)
-        gmail.set_debuglevel(1)
+        servidor = smtplib.SMTP(smtp_server, smtp_port)
+        servidor.starttls()
+        servidor.login(user,pasw)
+        servidor.set_debuglevel(1)
         rcpt = copia.split(",") + [dest]
 
         header = MIMEMultipart()
@@ -47,28 +48,20 @@ def enviarmsj():
             adjunto1.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(archivo1))
             header.attach(adjunto1)
 
-        if (os.path.isfile(archivo2)):
-            adjunto2 = MIMEBase('application', 'octet-stream')
-            adjunto2.set_payload(open(archivo2, "rb").read())
-            encode_base64(adjunto2)
-            adjunto2.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(archivo2))
-            header.attach(adjunto2)
-
-        gmail.sendmail(de,rcpt,header.as_string())
-
+        servidor.sendmail(de,rcpt,header.as_string())
+        print("Listo enviado")
     except Exception as e:
         print(e)
 
     finally:
-        gmail.quit()
+        servidor.quit()
         print("Conexion cerrada")
 
 def screenshot():
-    time.sleep(30)
+    time.sleep(3)
     pyautogui.screenshot("C:\\Screenshots\\" + str(name1) + ".png")
-    time.sleep(120)
-    pyautogui.screenshot("C:\\Screenshots\\" + str(name2) + ".png")
-    time.sleep(5)
+    time.sleep(3)
+    print("captura realizada")
 
 screenshot()
 enviarmsj()
